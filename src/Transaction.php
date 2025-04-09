@@ -3,11 +3,13 @@
 class Transaction 
 {
 	// access modifier: - public private protected
-	private float $amount;
-	private string $description;
+	// private float $amount;
+	// private string $description;
 
 	// constructor magic method - creates every instance the class is called
-	public function __construct(float $amount, string $description)
+	public function __construct(
+		private float $amount, 
+		private string $description)
 	{
 		$this->amount = $amount;
 		$this->description = $description;
