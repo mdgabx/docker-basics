@@ -1,29 +1,17 @@
 <?php
 
-declare(strict_types=1);
+require_once '../PaymentGateway/Paddle/Transaction.php';
+require_once '../PaymentGateway/Stripe/Transaction.php';
+require_once '../PaymentGateway/Paddle/CustomerProfile.php';
+require_once '../Notification/Email.php';
 
-require_once '../Transaction.php';
+use PaymentGateway\Paddle\{Transaction, CustomerProfile};
+use PaymentGateway\Stripe\Transaction as StripeTransaction;
 
-$class = 'Transaction';
+$paddleTransaction = new Transaction();
+$stripeTransaction = new StripeTransaction();
+$paddleCustomerProfile = new CustomerProfile();
 
-//Classes and Objects
-$amount = (new $class(100, 'Test'))
-				->addTax(8)
-				->applyDiscount(4)
-				->getAmount();
+var_dump($paddleTransaction, $stripeTransaction, $paddleCustomerProfile);
 
-// var_dump($amount);
-
-
-//std class
-
-$str = '{"a": 1, "b": 2, "c": 3}';
-
-$arr = json_decode($str, true); // make it an array by setting true
-
-// var_dump($arr);
-
-$arr = [1,2,3];
-$obj = (object) $arr;
-
-var_dump($obj->{1});
+include 'views/layout'; // the use aboove are not applied here need to add it manually
