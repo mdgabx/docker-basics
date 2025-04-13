@@ -1,32 +1,18 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace App\PaymentGateway\Paddle;
-
-use App\Enums\Status;
-// use Notification\Email;
-
 
 class Transaction 
 {
+	private float $amount;
 
-	private string $status;
-
-	public function __construct() 
+	public function __construct(float $amount)
 	{
-		$this->setStatus(Status::DECLINED);
+		$this->amount = $amount;
 	}
 
-	public function setStatus(string $status): self 
+	public function process()
 	{
-		if(! isset(Status::ALL_STATUSES[$status])) 
-		{
-			throw new \InvalidArgumentException('invalid status');
-		}
-
-		$this->status = $status;
-
-		return $this;
-	}
+		echo 'processing $' . $this->amount . ' transaction';
+	}	
 }

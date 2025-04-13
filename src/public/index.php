@@ -1,13 +1,16 @@
 <?php
 
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Enums\Status;
 use App\PaymentGateway\Paddle\Transaction;
 
-$transaction = new Transaction();
+$transaction = new Transaction(25.4);
 
-$transaction->setStatus(Status::PAID);
+// $ref = new ReflectionProperty(Transaction::class, 'amount');
+// $ref->setAccessible(true);
+// $transaction->amount;
+// setValue;
+// $ref->setValue($transaction, '213');
+// var_dump($ref->getValue($transaction));
 
-var_dump($transaction);
+$transaction->process();
