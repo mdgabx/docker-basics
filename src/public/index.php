@@ -3,11 +3,16 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Enums\Status;
 use App\PaymentGateway\Paddle\Transaction;
 
-$transaction = new Transaction();
+$transaction = new Transaction(25, 'Transaction');
 
-$transaction->setStatus(Status::PAID);
+$transaction = new Transaction(25, 'Transaction');
 
-var_dump($transaction);
+$transaction = new Transaction(25, 'Transaction');
+
+$transaction = new Transaction(25, 'Transaction');
+
+$transaction = new Transaction(25, 'Transaction');
+
+var_dump(Transaction::$count);
