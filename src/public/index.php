@@ -2,15 +2,15 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\PaymentGateway\Paddle\Transaction;
 
-$transaction = new Transaction(25.4);
+$fields = [
+    new \App\Fields\Text('textField'),
+    new \App\Fields\Checkbox('checkboxField'),
+    new \App\Fields\Radio('radioField'),
+];
 
-// $ref = new ReflectionProperty(Transaction::class, 'amount');
-// $ref->setAccessible(true);
-// $transaction->amount;
-// setValue;
-// $ref->setValue($transaction, '213');
-// var_dump($ref->getValue($transaction));
 
-$transaction->process();
+foreach($fields as $field) 
+{
+    echo $field->render() . '<br />';
+}
