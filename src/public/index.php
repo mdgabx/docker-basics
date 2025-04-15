@@ -2,15 +2,10 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use App\CollectionAgency;
+use App\DebtCollectionService;
+use App\Rocky;
 
-$fields = [
-    new \App\Fields\Text('textField'),
-    new \App\Fields\Checkbox('checkboxField'),
-    new \App\Fields\Radio('radioField'),
-];
+$service = new DebtCollectionService;
 
-
-foreach($fields as $field) 
-{
-    echo $field->render() . '<br />';
-}
+echo $service->collectDebt(new Rocky(100)) . PHP_EOL;
