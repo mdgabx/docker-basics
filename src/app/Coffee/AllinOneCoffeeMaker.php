@@ -8,5 +8,7 @@ use App\Traits\LatteTrait;
 class AllinOneCoffeeMaker extends CoffeeMaker
 {
     use LatteTrait;
-    use CappucinoTrait;
+    use CappucinoTrait {
+        CappucinoTrait::makeCappucino as public;
+    }
 }
