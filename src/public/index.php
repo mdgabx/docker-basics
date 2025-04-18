@@ -2,32 +2,13 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// use App\CollectionAgency;
-// use App\DebtCollectionService;
-// use App\Rocky;
+$obj = new class (1,2,3) {
 
-// $service = new DebtCollectionService;
+    public function __construct(int $x, int $y, int $z)
+    {
+        
+    }
 
-// echo $service->collectDebt(new Rocky(100)) . PHP_EOL;
+};
 
-use App\Coffee\CoffeeMaker;
-use App\Coffee\LatteMaker;
-use App\Coffee\CappucinoMaker;
-use App\Coffee\AllinOneCoffeeMaker;
-
-$coffee = new CoffeeMaker();
-$coffee->makeCoffee();
-
-$latte = new LatteMaker();
-$latte->makeCoffee();
-$latte->makeLatte();
-
-$cappucino = new CappucinoMaker();
-$cappucino->makeCoffee();
-$cappucino->makeCappucino();
-
-$allinOne = new AllinOneCoffeeMaker();
-$allinOne->makeCoffee();
-$allinOne->makeLatte();
-$allinOne->makeCappucino();
-
+var_dump();
