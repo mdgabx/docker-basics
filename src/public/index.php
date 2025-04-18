@@ -1,14 +1,11 @@
 <?php
 
+use App\Invoice;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$obj = new class (1,2,3) {
+$invoice = new Invoice();
 
-    public function __construct(int $x, int $y, int $z)
-    {
-        
-    }
+$invoice2 = clone $invoice;
 
-};
-
-var_dump();
+var_dump($invoice, $invoice2, $invoice === $invoice2);
