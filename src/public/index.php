@@ -4,8 +4,8 @@ use App\Invoice;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$invoice = new Invoice();
+$invoice = new Invoice(25, 'serialize', '91039');
 
-$invoice2 = clone $invoice;
+$str = serialize($invoice);
 
-var_dump($invoice, $invoice2, $invoice === $invoice2);
+echo $str . PHP_EOL;
