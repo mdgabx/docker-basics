@@ -2,10 +2,17 @@
 
 use App\Invoice;
 
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$invoice = new Invoice(25, 'serialize', '91039');
+$router = new App\Router();
 
-$str = serialize($invoice);
+$router->register('/', function () {
+    echo 'home';
+});
 
-echo $str . PHP_EOL;
+$router->register('/invoices', function () {
+    echo 'invoices';
+});
+
+echo $router->resolve($_SERVER['REQUEST_URI']);
