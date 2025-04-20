@@ -14,15 +14,18 @@ class HomeController
     {   
         try {
             $db = new PDO('mysql:host=db;dbname=my_db', 'root', 'root', [
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
             ]);
             
-            $query = 'SELECT * FROM users';
+            $email = $_GET['email'];
+            $query = 'SELECT * FROM users where email=?';
 
-            $stmt = $db->query($query);
+            $stmt = $db->prepare($query);
 
-            
-            foreach($stmt as $u) {
+            $stmt->execute([$email]);
+
+            // $stmt = $db->query($query);
+
+            foreach($stmt->fetchAll() as $u) {
                 echo '<pre>';
                 var_dump($u);
                 echo '</pre>';
@@ -33,8 +36,6 @@ class HomeController
             //     var_dump($u);
             //     echo '</pre>';
             // }
-
-            // var_dump($stmt->fetchAll());
             
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), $e->getCode());
