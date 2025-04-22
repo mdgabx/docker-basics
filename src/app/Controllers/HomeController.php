@@ -4,22 +4,15 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\App;
 use App\View;
-use PDO;
-use PDOException;
 use Throwable;
 
 class HomeController 
 {
     public function index(): View
     {   
-        try {
-            $db = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], 
-            $_ENV['DB_USER'], 
-            $_ENV['DB_PASS']);
-        } catch (PDOException $e) {
-            throw new PDOException($e->getMessage(), (int) $e->getCode());
-        }
+        $db = App::db();
 
         $email = 'johASDn@asdoe.com';
         $name = 'john doe';
@@ -70,7 +63,7 @@ class HomeController
 
         // $stmt = $db->query($query);
         echo '<pre>';
-        var_dump($fetchStmt->fetchAll(PDO::FETCH_ASSOC));
+        var_dump($fetchStmt->fetchAll(\PDO::FETCH_ASSOC));
         echo '</pre>';
 
         // foreach($stmt->fetchAll() as $u) {
