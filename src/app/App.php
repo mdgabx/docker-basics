@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace App;
 
 use App\RouteNotFoundException;
-use App\DB;
 
 class App 
 {
     private static DB $db;
 
-    public function __construct(protected $router, protected array $request, protected array $config)
+    public function __construct(protected Router $router, protected array $request, protected Config $config)
     {
-        static::$db = new DB($config);
+        static::$db = new DB($config->db ?? []);
     }
 
     public static function db(): DB
@@ -27,7 +26,7 @@ class App
 
             echo $this->router->resolve(
                 $this->request['uri'], 
-                strtolower($this->request['method']));
+                strtolower($this->request['method'])); 
             
         } catch (RouteNotFoundException) {
 

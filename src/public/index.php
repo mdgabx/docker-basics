@@ -1,6 +1,7 @@
 <?php
 
 use App\App;
+use App\Config;
 use App\Router;
 use App\Controllers\HomeController;
 use App\Controllers\InvoiceController;
@@ -28,10 +29,5 @@ $router
 
 (new App($router, 
     ['uri' => $_SERVER['REQUEST_URI'], 'method' => $_SERVER['REQUEST_METHOD']],
-    [
-        'host' => $_ENV['DB_HOST'], 
-        'db' => $_ENV['DB_DATABASE'], 
-        'user' =>  $_ENV['DB_USER'], 
-        'pass' => $_ENV['DB_PASS'], 
-        'driver' => $_ENV['DB_DRIVER'] ?? 'mysql:host='], 
+    new Config($_ENV)
     ))->run();
