@@ -18,7 +18,7 @@ class DB
 
         try {
             $this->pdo = new PDO(
-                        $this->config['driver']. $this->config['host']  . ';dbname=' . $this->config['db'], 
+                        $this->config['driver'] . ':host=' . $this->config['host']  . ';dbname=' . $this->config['database'], 
                         $this->config['user'], 
                         $this->config['pass'],
                         $this->config['options'] ?? $defaultOptions

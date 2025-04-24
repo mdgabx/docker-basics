@@ -6,79 +6,32 @@ namespace App\Controllers;
 
 use App\App;
 use App\View;
-use Throwable;
+use App\Model\User;
+use App\Model\Invoice;
+use App\Model\SignUp;
 
 class HomeController 
 {
     public function index(): View
     {   
-        $db = App::db();
-
-        $email = 'johASDn@asdoe.com';
-        $name = 'john doe';
+        $email = 'johASDasdasn@asdoe.com';
+        $name = 'johnasd doe';
         $amount = 25;
 
-        try {
-            $db->beginTransaction();
+        $userModel = new User();
+        $invoiceModel = new Invoice();
 
-            // $query = 'SELECT * FROM users where email=?';
-            $userStmt = $db->prepare(
-                'INSERT INTO users (email, full_name, is_active, created_at)
-                VALUES(?, ?, 1, NOW())'
-            );
-    
-            $invoiceStmt = $db->prepare(
-                'INSERT INTO invoices (amount, user_id)
-                VALUES (?, ?)'
-            );
-    
-            $userStmt->execute([$email, $name]);
-    
-            $userId = (int) $db->lastInsertId();
-    
-            $invoiceStmt->execute([$amount, $userId]);
-    
-            $db->commit();
-
-        } catch (Throwable $e) {
-            if($db->inTransaction()) {
-                $db->rollBack();
-            }
-           
-        }
-
-
-        $fetchStmt = $db->prepare(
-            'SELECT invoices.id AS invoice_id, amount, user_id, full_name
-            FROM invoices
-            INNER JOIN users ON user_id = users.id
-            WHERE email = ?'
+        $invoiceId = (new SignUp($userModel, $invoiceModel))->register(
+            [
+                'email' => $email,
+                'name'  => $name,
+            ],
+            [
+                'amount' => $amount,
+            ]
         );
 
-        $fetchStmt->execute([$email]);
-
-        // $stmt = $db->prepare($query);
-
-        // $stmt->execute([$email]);
-
-        // $stmt = $db->query($query);
-        echo '<pre>';
-        var_dump($fetchStmt->fetchAll(\PDO::FETCH_ASSOC));
-        echo '</pre>';
-
-        // foreach($stmt->fetchAll() as $u) {
-            // echo '<pre>';
-            // var_dump($u);
-            // echo '</pre>';
-        // }
-
-        // foreach($stmt->fetchAll(PDO::FETCH_OBJ) as $u) {
-        //     echo '<pre>';
-        //     var_dump($u);
-        //     echo '</pre>';
-        // }
-       
-        return View::make('index');
+        return View::make('index', ['invoice' => $invoiceModel->find($invoiceId)]);
     }
 
     public function download() 
@@ -94,13 +47,8 @@ class HomeController
         $filePath = STORAGE_PATH . '/' . $_FILES['receipt']['name'];
         move_uploaded_file($_FILES['receipt']['tmp_name'], $filePath);
 
-        // echo '<pre>';
-        // var_dump(pathinfo($filePath));
-        // echo '</pre>';
-
         header('Location: /');
         exit;
 
-        // unlink(STORAGE_PATH . '/chrome_cjLzcbTBdm.png');
     }
 }
