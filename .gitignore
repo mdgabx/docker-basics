@@ -1,2 +1,4 @@
-/src/vendor/
-/src/.env/
+/vendor/
+/docker/storage/
+.env
+/storage/
