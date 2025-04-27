@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\App;
 use App\View;
 use App\Model\User;
 use App\Model\Invoice;
@@ -14,8 +13,8 @@ class HomeController
 {
     public function index(): View
     {   
-        $email = 'johASDasdasn@asdoe.com';
-        $name = 'johnasd doe';
+        $email = 'johASasdasdasn@asdoe.com';
+        $name = 'johnaadasd doe';
         $amount = 25;
 
         $userModel = new User();
