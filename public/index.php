@@ -5,6 +5,7 @@ use App\Config;
 use App\Router;
 use App\Controllers\HomeController;
 use App\Controllers\InvoiceController;
+use App\Container;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -16,7 +17,8 @@ session_start();
 define('STORAGE_PATH', __DIR__ . '/../storage');
 define('VIEW_PATH', __DIR__ . '/../views');
 
-$router = new Router;
+$container = new Container();
+$router = new Router($container);
 
 $router
     ->get('/', [HomeController::class, 'index'])

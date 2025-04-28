@@ -10,33 +10,19 @@ use App\Model\User;
 use App\Model\Invoice;
 use App\Model\SignUp;
 use App\Services\InvoiceService;
+use App\Container;
 
 class HomeController 
 {
+    public function __construct(private InvoiceService $invoiceService)
+    {
+    }
+
     public function index(): View
     {   
-        App::$container->get(InvoiceService::class)->process([], 25);
+        $this->invoiceService->process([], 25);
 
         return View::make('index');
-
-        // $email = 'johASasdasdasn@asdoe.com';
-        // $name = 'johnaadasd doe';
-        // $amount = 25;
-
-        // $userModel = new User();
-        // $invoiceModel = new Invoice();
-
-        // $invoiceId = (new SignUp($userModel, $invoiceModel))->register(
-        //     [   
-        //         'email' => $email,
-        //         'name'  => $name,
-        //     ],
-        //     [
-        //         'amount' => $amount,
-        //     ]
-        // );
-
-        // return View::make('index', ['invoice' => $invoiceModel->find($invoiceId)]);
     }
 
     public function download() 
