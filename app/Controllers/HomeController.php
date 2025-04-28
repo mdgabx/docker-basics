@@ -4,33 +4,39 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\App;
 use App\View;
 use App\Model\User;
 use App\Model\Invoice;
 use App\Model\SignUp;
+use App\Services\InvoiceService;
 
 class HomeController 
 {
     public function index(): View
     {   
-        $email = 'johASasdasdasn@asdoe.com';
-        $name = 'johnaadasd doe';
-        $amount = 25;
+        App::$container->get(InvoiceService::class)->process([], 25);
 
-        $userModel = new User();
-        $invoiceModel = new Invoice();
+        return View::make('index');
 
-        $invoiceId = (new SignUp($userModel, $invoiceModel))->register(
-            [
-                'email' => $email,
-                'name'  => $name,
-            ],
-            [
-                'amount' => $amount,
-            ]
-        );
+        // $email = 'johASasdasdasn@asdoe.com';
+        // $name = 'johnaadasd doe';
+        // $amount = 25;
 
-        return View::make('index', ['invoice' => $invoiceModel->find($invoiceId)]);
+        // $userModel = new User();
+        // $invoiceModel = new Invoice();
+
+        // $invoiceId = (new SignUp($userModel, $invoiceModel))->register(
+        //     [   
+        //         'email' => $email,
+        //         'name'  => $name,
+        //     ],
+        //     [
+        //         'amount' => $amount,
+        //     ]
+        // );
+
+        // return View::make('index', ['invoice' => $invoiceModel->find($invoiceId)]);
     }
 
     public function download() 

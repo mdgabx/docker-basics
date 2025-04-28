@@ -2,7 +2,7 @@
 
 namespace App;
 
-class InvoiceController
+class Invoice
 {
     public string $id;
     
