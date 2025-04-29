@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
+use App\Interfaces\PaymentGatewayServiceInterface;
+
 class InvoiceService 
 {
     public function __construct(
         protected SalesTaxService $salesTaxService,
-        protected PaymentGatewayService $gatewayService,
+        protected PaymentGatewayServiceInterface $gatewayService,
         protected EmailService $emailService
      )
     {
