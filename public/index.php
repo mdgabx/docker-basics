@@ -6,6 +6,7 @@ use App\Router;
 use App\Controllers\HomeController;
 use App\Controllers\InvoiceController;
 use App\Container;
+use App\Controllers\GeneratorExampleController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -22,11 +23,15 @@ $router = new Router($container);
 
 $router
     ->get('/', [HomeController::class, 'index'])
-    ->get('/download', [HomeController::class, 'download'])
-    ->post('/upload', [HomeController::class, 'upload'])
-    ->get('/invoices', [InvoiceController::class, 'index'])
-    ->get('/invoices/create', [InvoiceController::class, 'create'])
-    ->post('/invoices/create', [InvoiceController::class, 'store']);
+    ->get('/example/generator', [GeneratorExampleController::class, 'index']);
+
+// $router
+//     ->get('/', [HomeController::class, 'index'])
+//     ->get('/download', [HomeController::class, 'download'])
+//     ->post('/upload', [HomeController::class, 'upload'])
+//     ->get('/invoices', [InvoiceController::class, 'index'])
+//     ->get('/invoices/create', [InvoiceController::class, 'create'])
+//     ->post('/invoices/create', [InvoiceController::class, 'store']);
 
 
 (new App(
