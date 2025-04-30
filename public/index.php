@@ -21,9 +21,17 @@ define('VIEW_PATH', __DIR__ . '/../views');
 $container = new Container();
 $router = new Router($container);
 
-$router
-    ->get('/', [HomeController::class, 'index'])
-    ->get('/example/generator', [GeneratorExampleController::class, 'index']);
+$router->registerRoutesFromControllerAttributes(
+    [
+        HomeController::class,
+        GeneratorExampleController::class
+    ]
+);
+
+// comment for attributes
+// $router
+//     ->get('/', [HomeController::class, 'index'])
+//     ->get('/example/generator', [GeneratorExampleController::class, 'index']);
 
 // $router
 //     ->get('/', [HomeController::class, 'index'])

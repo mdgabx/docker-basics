@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Attributes\Route;
 use App\Model\Ticket;
 use Generator;
 
@@ -12,11 +13,14 @@ class GeneratorExampleController
 
     }
 
+    #[Route('/examples/generator')]
     public function index()
     {
-        foreach($this->ticketModel->all() as $ticket) {
-            echo $ticket['id'] . ': ' . substr($ticket['content'], 0, 15) . '<br />';
-        }
+        // foreach($this->ticketModel->all() as $ticket) {
+        //     echo $ticket['id'] . ': ' . substr($ticket['content'], 0, 15) . '<br />';
+        // }
+
+        echo 'sample';
     }
 
     // public function index()
