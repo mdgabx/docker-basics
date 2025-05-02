@@ -3,9 +3,28 @@
 namespace App\Model;
 
 use App\Model;
+use PDO;
+use App\Enums\InvoiceStatus;
+use RuntimeException;
 
 class Invoice extends Model
 {
+
+    public function all(InvoiceStatus $status): array 
+    {   
+        // if(! in_array($status, InvoiceStatus::all(Invoice))) {
+        //     throw new RuntimeException('Invalid status [' . $status . ']');
+        // }
+
+        $stmt = $this->db->pdo(
+            'SELECT id, invoice_number, amount, status
+            FROM invoices WHERE status = ?'
+        );
+
+        $stmt->execute([$status->value]);
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
 
     public function create(float $amount, int $userId): int
     {
