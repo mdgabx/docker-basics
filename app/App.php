@@ -10,49 +10,43 @@ use App\Services\EmailService;
 use App\Services\InvoiceService;
 use App\Services\SalesTaxService;
 use App\Services\PaymentGatewayService;
+use Dotenv\Dotenv;
+use Symfony\Component\Mailer\MailerInterface;
 
 class App 
 {
     private static DB $db;
- //   public static Container $container;
+    private Config $config;
 
     public function __construct(
         protected Container $container,
-        protected Router $router, 
-        protected array $request, 
-        protected Config $config)
-    {
-        static::$db = new DB($config->db ?? []);
-
-        $this->container->set(
-            PaymentGatewayServiceInterface::class, fn(Container $c) =>
-            $c->get(PaymentGatewayService::class)
-        );
+        protected ?Router $router = null, 
+        protected array $request = []
+    ){
     }
 
-
-        // dependency injection basic form
-
-        // static::$container = new Container();
-
-        // static::$container->set(InvoiceService::class, function(Container $c){
-        //     return new InvoiceService(
-        //             $c->get(SalesTaxService::class),
-        //             $c->get(PaymentGatewayService::class),
-        //             $c->get(EmailService::class)
-        //         );
-        //     }
-        // );
-
-        // static::$container->set(SalesTaxService::class, fn() => new SalesTaxService());
-        // static::$container->set(PaymentGatewayService::class, fn() => new PaymentGatewayService);
-        // static::$container->set(EmailService::class, fn() => new EmailService());
-    //}
-
-    public static function db(): DB
+    public function initDb(array $config)
     {
-        return static::$db;
+        $dotenv = Dotenv::createImmutable(dirname(__DIR__));
+        $dotenv->load();
+        
+        $capsule = new Manage;
+
+        $params = [
+            'host' => 
+        ]
     }
+
+    public function boot(): static
+    {
+     
+        $this->config = new Config($_ENV);
+
+        $this->initDb();
+
+       // $this->container->set(MailerInterface::class, fn() => new Cust)
+    }
+
 
     public function run() 
     {
