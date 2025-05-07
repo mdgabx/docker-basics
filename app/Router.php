@@ -7,6 +7,7 @@ namespace  App;
 use App\RouteNotFoundException;
 use ReflectionClass;
 use App\Attributes\Route;
+use Illuminate\Container\Container;
 
 class Router
 {
@@ -75,16 +76,18 @@ class Router
         if (is_callable($action)) {
             return call_user_func($action);
         }
-
+        
         [$class, $method] = $action;
-
+        
+        // Instantiate the class properly
         if (class_exists($class)) {
-            $class = $this->container->get($class);
-
+            $class = $this->container->get($class); // Dependency injection via Container
+        
             if (method_exists($class, $method)) {
                 return call_user_func_array([$class, $method], []);
             }
         }
+        
 
         throw new RouteNotFoundException();
     }

@@ -14,8 +14,8 @@ class HomeController
     {
     }
 
-    // attributes
-    #[Route('/')]
+    // // attributes
+    // #[Route('/')]
     public function index(): View
     {   
         $this->invoiceService->process([], 25);
@@ -23,13 +23,13 @@ class HomeController
         return View::make('index');
     }
 
-    #[Route('/', 'post')]
+    // #[Route('/', 'post')]
     public function store()
     {
 
     }
 
-    #[Route('/', 'put')]
+    // #[Route('/', 'put')]
     public function update()
     {
         

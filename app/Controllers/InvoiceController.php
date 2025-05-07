@@ -15,23 +15,11 @@ class InvoiceController
     public function index(): View
     {
 
-        $status1 = InvoiceStatus::Paid;
-
-        $invoice = new Invoice();
-        $invoices = $invoice->all($status1);
+        $invoices = Invoice::query()
+            ->all(InvoiceStatus::Paid)
+            ->get()
+            ->toArray();
 
         return View::make('invoices/index', ['invoices' => $invoices]);
     }
-
-    // public function create(): View
-    // {
-    //     return View::make('invoices/create');
-    // }
-
-    // public function store()
-    // {
-    //     $amount = $_POST['amount'];
-
-    //     var_dump($amount);
-    // }
 }
